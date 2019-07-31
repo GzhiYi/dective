@@ -13,6 +13,10 @@ export default new Router({
     {
       path: '*',
       redirect: '/'
+    },
+    {
+      path: '/infopage',
+      component: require('@/components/InfoPage').default
     }
   ]
 })
