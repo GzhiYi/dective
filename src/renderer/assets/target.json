@@ -1,0 +1,22 @@
+[
+  {
+    "title": "titan",
+    "notiTitle": "更新啦",
+    "notiSubtitle": "已更新120集",
+    "reg": 120,
+    "url": "https://www.manhuadui.com/manhua/jinjidejuren/",
+    "elem": "#chapter-list-1 li .list_con_zj",
+    "interval": 10000,
+    "pause": false
+  },
+  {
+    "title": "titan2",
+    "notiTitle": "更新啦",
+    "notiSubtitle": "已更新120集",
+    "reg": 120,
+    "url": "https://www.manhuadui.com/manhua/jinjidejuren/",
+    "elem": "#chapter-list-1 li .list_con_zj4",
+    "interval": 12000,
+    "pause": false
+  }
+]
