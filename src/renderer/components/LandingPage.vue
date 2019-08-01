@@ -29,6 +29,8 @@
 <script>
   import Nav from './Nav'
   import target from '../assets/target.json'
+  const superagent = require('superagent')
+  const cheerio = require('cheerio')
   let timer = {}
   export default {
     name: 'landing-page',
@@ -86,7 +88,31 @@
         })
       },
       fetch (tar, index) {
-
+        let reg = new RegExp(tar.reg)
+        const self = this
+        superagent.get(tar.url).end((err, res) => {
+          if (err) {
+            let noti = new Notification(`${tar.title}勘测出错`, {
+              body: err
+            })
+            noti.onclick = function () {}
+          }
+          let $ = cheerio.load(res.text)
+          $(tar.elem).each(function (i, elem) {
+            if (reg.test(elem.children[0].data)) {
+              self.showNotification(tar, elem.children[0].data)
+            }
+          })
+        })
+      },
+      showNotification (tar, findResult) {
+        const self = this
+        let noti = new Notification(tar.notiTitle, {
+          body: findResult || tar.notiSubtitle
+        })
+        noti.onclick = function () {
+          self.$electron.shell.openExternal(tar.url)
+        }
       }
     }
   }

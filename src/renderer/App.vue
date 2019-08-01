@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive include="LandingPage,InfoPage">
+    <keep-alive :include="['landing-page','info-page']">
       <router-view></router-view>
     </keep-alive>
   </div>

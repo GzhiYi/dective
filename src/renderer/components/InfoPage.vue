@@ -6,6 +6,7 @@
 <script>
 import Nav from './Nav'
 export default {
+  name: 'info-page',
   components: {
     Nav
   }
