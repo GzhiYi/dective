@@ -8,9 +8,9 @@
           <!-- <p>元素：{{item.elem}}</p> -->
         </div>
         <div class="btns">
-          <a class="e-btn white small">编辑</a>
-          <a :class="`${item.pause ? 'e-btn danger small' : 'e-btn primary small'}`" @click="control(item, index)" v-if="item.pause">启动</a>
-          <a :class="`${item.pause ? 'e-btn danger small' : 'e-btn primary small'}`" @click="control(item, index)" v-else>勘测...</a>
+          <a class="e-btn anime white small">编辑</a>
+          <a :class="`${item.pause ? 'e-btn anime danger small' : 'e-btn anime primary small'}`" @click="control(item, index)" v-if="item.pause">启动</a>
+          <a :class="`${item.pause ? 'e-btn anime danger small' : 'e-btn anime primary small'}`" @click="control(item, index)" v-else>勘测...</a>
         </div>
       </div>
       <div class="in-progress">
