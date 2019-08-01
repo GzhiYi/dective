@@ -4,7 +4,7 @@
     <div class="e-box" v-for="(item, index) in target" :key="item.elem">
       <div class="info">
         <div class="detail">
-          <h4>{{item.title}}</h4>
+          <h4>{{item.title}}({{item.reg}})</h4>
           <!-- <p>元素：{{item.elem}}</p> -->
         </div>
         <div class="btns">

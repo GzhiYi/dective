@@ -2,16 +2,19 @@
   <div class="info-page">
     <Nav tab="Info"></Nav>
     <div class="content">
-      <ul>
-        <li class="item" v-for="item in rankList" :key="item.title">
-          <a href="#" @click="showWebview(item.url)">{{item.title}}</a>
+      <ul class="list e-box">
+        <li class="item" v-for="(item, index) in rankList" :key="item.title">
+          <a href="#" @click="showWebview(item.url)"><span class="e-tag shadow-3 warning rounded">{{index + 1}}</span>{{item.title}}</a>
         </li>
       </ul>
-      <webview
-        :src="webviewUrl"
-        style="display:inline-flex; width:414px; height:736px"
-        useragent="Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) CriOS/59.0.3071.102 Mobile/14G60 Safari/602.1"
-      ></webview>
+      <div class="e-box">
+        <webview
+          :src="webviewUrl"
+          style="display:inline-flex; width:414px; height:736px"
+          useragent="Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) CriOS/59.0.3071.102 Mobile/14G60 Safari/602.1"
+        ></webview>
+      </div>
+      
     </div>
     <div class="select-btn">
       <a :class="`e-btn circle primary ${active === 1 ? '' : 'is-active'}`" @click="changeList(1)"><i class="fab fa-zhihu"></i></a>
@@ -59,7 +62,7 @@ export default {
             })
           }
         })
-        this.rankList = rankList
+        this.rankList = rankList.filter((item, index) => ![0, 3].includes(index))
       })
     },
     changeList (active) {
@@ -104,5 +107,19 @@ export default {
 }
 .item {
   font-size: 13px;
+  font-size: 13px;
+  padding: 4px 0;
+  .e-tag {
+    text-align: center;
+    display: inline-block;
+    width: 29px;
+    margin-right: 10px;
+  }
+}
+.list {
+  max-height: 700px;
+  overflow: scroll;
+  overflow-x: hidden;
+  width: 44%;
 }
 </style>

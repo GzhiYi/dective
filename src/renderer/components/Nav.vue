@@ -2,8 +2,8 @@
   <div class="d-nav">
     <nav class="e-tabs centered">
       <ul>
-        <li :class="{active: tab === 'Time'}" @click="goTo('Time')"><a href="#">Time</a></li>
-        <li :class="{active: tab === 'Info'}" @click="goTo('Info')"><a href="#">Hot</a></li>
+        <li :class="{active: tab === 'Time'}" @click="goTo('Time')"><a href="#">勘测</a></li>
+        <li :class="{active: tab === 'Info'}" @click="goTo('Info')"><a href="#">热点</a></li>
       </ul>
     </nav>
   </div>
