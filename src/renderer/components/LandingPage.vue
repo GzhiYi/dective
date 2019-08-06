@@ -97,8 +97,10 @@
             })
             noti.onclick = function () {}
           }
+          console.log('rrr', res)
           let $ = cheerio.load(res.text)
           $(tar.elem).each(function (i, elem) {
+            console.log('elem', elem)
             if (reg.test(elem.children[0].data)) {
               self.showNotification(tar, elem.children[0].data)
             }
