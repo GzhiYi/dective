@@ -4,10 +4,9 @@
     <div class="content">
       <div style="width: 38.7%;">
         <ul class="list e-box">
-          <li class="item" v-for="(item, index) in rankList" :key="item.title">
+          <li class="item" v-for="(item, index) in weiboRankList" :key="item.title">
             <a href="#" @click="showWebview(item.url)"><span class="e-tag shadow-3 warning rounded">{{index + 1}}</span>{{item.title}}</a>
           </li>
-          
         </ul>
         <div class="e-box status-bar">
           <a class="e-btn circle small primary btn-tiny" @click="getListData"><i class="fas fa-redo-alt"></i></a>
@@ -15,6 +14,9 @@
             <span class="e-tag rounded shadow primary" style="margin-bottom: 0;">上回更新</span>
             <span class="e-tag rounded shadow grey" style="margin-bottom: 0;">{{lastUpdate}}</span>
           </div>
+        </div>
+        <div class="e-box status-bar">
+          <input class="e-control small" type="text" v-model="filterWord" placeholder="过滤词">
         </div>
       </div>
       <div>
@@ -30,14 +32,14 @@
       
     </div>
     <div class="select-btn">
-      <a :class="`e-btn circle inst-gradient ${active === 2 ? '' : 'is-active'}`" @click="changeList(2)"><i class="fab fa-weibo"></i></a>
-      <a :class="`e-btn circle primary ${active === 1 ? '' : 'is-active'}`" @click="changeList(1)"><i class="fab fa-zhihu"></i></a>
+      <a :class="`e-btn circle inst-gradient ${active === 2 ? '' : 'is-active'}`" @click="getListData"><i class="fab fa-weibo"></i></a>
+      <!-- <a :class="`e-btn circle primary ${active === 1 ? '' : 'is-active'}`" @click="changeList(1)"><i class="fab fa-zhihu"></i></a> -->
     </div>
   </div>
 </template>
 <script>
 import Nav from './Nav'
-// import regex from '../assets/filter'
+import { regex } from '../assets/filter'
 
 const superagent = require('superagent')
 const cheerio = require('cheerio')
@@ -48,15 +50,20 @@ export default {
   },
   data () {
     return {
-      rankList: [],
+      weiboRankList: [],
+      zhihuRankList: [],
       weiboUrl: 'https://s.weibo.com',
+      zhihuUrl: 'https://www.zhihu.com',
       active: 2,
       webviewUrl: '',
-      lastUpdate: ''
+      lastUpdate: '',
+      filterList: [],
+      filterWord: ''
     }
   },
   created () {
     this.getListData()
+    console.log('hahah', regex)
   },
   methods: {
     getListData () {
@@ -69,17 +76,17 @@ export default {
           noti.onclick = function () {}
         }
         let $ = cheerio.load(res.text)
-        const rankList = []
+        const weiboRankList = []
         $('.wbs-hotrank .data td').each((i, elem) => {
-          console.log('elem', elem)
           if (elem.attribs.class === 'td-02') {
-            rankList.push({
+            weiboRankList.push({
               title: elem.children[1].children[0].data,
               url: elem.children[1].attribs.href
             })
           }
         })
-        this.rankList = rankList.filter((item, index) => ![0, 3].includes(index))
+        this.weiboRankList = weiboRankList.filter((item, index) => ![0, 3].includes(index) && !regex.test(item.title))
+        this.filterList = weiboRankList.filter((item, index) => regex.test(item.title))
       })
     },
     changeList (active) {

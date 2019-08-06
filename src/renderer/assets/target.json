@@ -8,15 +8,5 @@
     "elem": "#chapter-list-1 li .list_con_zj",
     "interval": 300000,
     "pause": false
-  },
-  {
-    "title": "海贼王",
-    "notiTitle": "已勘测到海贼王更新！！！",
-    "notiSubtitle": "已更新951集",
-    "reg": 950,
-    "url": "https://www.ishuhui.com/comics/anime/1",
-    "elem": ".ant-tag.ant-tag-red.b-text-ellipsis",
-    "interval": 10000,
-    "pause": false
   }
 ]
